@@ -1,0 +1,14 @@
+{
+  "name": "pocketlog",
+  "description": "accept requests from Pocket via IFTTT and posts them to a JSON log on S3",
+  "region": "us-west-2",
+  "handler": "pocketlog.handler",
+  "role": "arn:aws:iam::<account number>:role/PocketLogRole",
+  "ignore": [
+    "circle.yml",
+    ".git",
+    "/*.pyc"
+  ],
+  "timeout": 30,
+  "memory": 128
+}
