@@ -61,7 +61,7 @@ def write_log(bucket, key, contents):
   '''write a reading log to s3'''
   s3.put_object(Bucket=bucket, Key=key, Body=StringIO.StringIO(contents).read())
 
-def handler(event, context, bucket=DEFAULTS['bucket'], path=DEFAULTS['path'], dt=DEFAULTS['dt']):
+def handler(event, context, bucket=DEFAULTS['bucket'], path=DEFAULTS['path'], dt=DEFAULTS['dt'], apikey=DEFAULTS['apikey']):
   '''Receive JSON payloads from Pocket via IFTTT, record them by date.'''
 
   operations = {
@@ -76,6 +76,10 @@ def handler(event, context, bucket=DEFAULTS['bucket'], path=DEFAULTS['path'], dt
       payload = event['queryStringParameters']
     else:
       payload = json.loads(event['body']) if type(event['body']) is not dict else event['body']
+
+    if 'apikey' not in payload.keys() or payload['apikey'] != apikey:
+      return respond(ValueError('NOPE. Gimme an API key.'))
+      
     return respond(None, operations[operation](payload))
   else:
     return respond(ValueError('Unsupported method "{}"'.format(operation)))

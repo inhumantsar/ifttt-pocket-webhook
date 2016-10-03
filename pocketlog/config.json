@@ -1,5 +1,6 @@
 {
   "bucket":"samsite.ca",
+  "apikey":"some long and hopefully complex string goes here",
   "path":"pocketlog/json",
   "dt": null
 }
