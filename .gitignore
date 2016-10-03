@@ -1,3 +1,6 @@
+pocketlog/config.json
+lambda.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
