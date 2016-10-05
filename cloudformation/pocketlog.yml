@@ -15,8 +15,22 @@ Resources:
                 - lambda.amazonaws.com
             Action:
               - "sts:AssumeRole"
-      RoleName: PocketLogRole
-  PocketLogRolePolicy:
+  PocketLogLogsPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      Roles:
+        - !Ref PocketLogRole
+      PolicyName: pocketlog-cloudwatch
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          -
+            Effect: Allow
+            Action:
+              - logs:*
+            Resource:
+              - arn:aws:logs:*:*:*
+  PocketLogS3Policy:
     Type: AWS::IAM::Policy
     Properties:
       Roles:
